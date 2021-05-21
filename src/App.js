@@ -1,23 +1,44 @@
-import logo from './logo.svg';
 import './App.css';
+import React,{useState} from 'react';
+import Commenter from './components/Commenter';
+import Comments from './components/Comments';
 
 function App() {
+  const [currentComment, setCurrentComment] = useState({});
+  const [newComment,setNewComment] = useState({});
+  const [deletedComment, setDeletedComment] = useState({});
+  const [updatedComment, setUpdatedComment] = useState({});
+  
+  const editingComment = (comment) =>{
+    setCurrentComment(comment);
+  }
+
+  const deletingComment = (comment) =>{
+    setDeletedComment(comment);
+  }
+
+  const addingNewComment = (comment) =>{
+    setNewComment(comment);
+  }
+
+  const updatingComment = (comment) =>{
+    setUpdatedComment(comment);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Comments 
+        editingComment={editingComment} 
+        newComment={newComment} 
+        deletingComment={deletingComment} 
+        deletedComment={deletedComment} 
+        updatedComment={updatedComment}/>
+      <Commenter 
+        comment={currentComment} 
+        addingNewComment={addingNewComment} 
+        updatingComment={updatingComment}
+        editingComment={editingComment}
+      />
     </div>
   );
 }
